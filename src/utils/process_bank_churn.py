@@ -219,10 +219,6 @@ def preprocess_new_data(
     return inputs
 
 
-def preprocess__new_data(*args, **kwargs):
-    """Backward-compatible alias for preprocess_new_data."""
-    return preprocess_new_data(*args, **kwargs)
-
 def compute_auroc_and_build_roc(
     model,
     inputs: pd.DataFrame,
@@ -249,8 +245,6 @@ def compute_auroc_and_build_roc(
     plt.grid(alpha=0.25)
     plt.show()
 
-    return roc_auc
-
 __all__ = [
     "get_input_columns",
     "split_inputs_targets",
@@ -259,5 +253,5 @@ __all__ = [
     "encode_categorical_features",
     "preprocess_data",
     "preprocess_new_data",
-    "preprocess__new_data",
+    "compute_auroc_and_build_roc"
 ]
