@@ -26,13 +26,14 @@ def split_inputs_targets(
     target_col: str = "Exited",
     test_size: float = 0.2,
     random_state: int = 42,
+    stratify: bool = True,
 ) -> Tuple[pd.DataFrame, pd.Series, pd.DataFrame, pd.Series]:
     """Split raw data into train/validation parts with stratification by target."""
     train_df, val_df = train_test_split(
         raw_df,
         test_size=test_size,
         random_state=random_state,
-        stratify=raw_df[target_col],
+        stratify=raw_df[target_col] if stratify else None,
     )
 
     train_inputs = train_df[input_cols].copy()
@@ -111,6 +112,7 @@ def preprocess_data(
     test_size: float = 0.2,
     random_state: int = 42,
     scaler_numeric: bool = True,
+    stratify: bool = True,
 ) -> Tuple[
     pd.DataFrame,
     pd.Series,
@@ -134,6 +136,7 @@ def preprocess_data(
         target_col=target_col,
         test_size=test_size,
         random_state=random_state,
+        stratify=stratify,
     )
 
     numeric_cols, categorical_cols = detect_column_types(train_inputs)
